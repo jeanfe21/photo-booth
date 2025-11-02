@@ -52,7 +52,9 @@ export default function VoucherInput() {
         openDesktopApp(code.trim())
         
         // Also open web fallback in case desktop app is not installed
-   
+        setTimeout(() => {
+          router.push("/booth/app")
+        }, 500)
       } else {
         setError("Voucher tidak valid")
       }
