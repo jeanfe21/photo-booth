@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Photo Booth Application
 
-## Getting Started
+Aplikasi photo booth modern dengan sistem voucher dan pembayaran QRIS/Tunai.
 
-First, run the development server:
+## 🚀 Features
+
+- ✅ **Modern UI** dengan dark theme & gradient animasi
+- ✅ **Payment Options** QRIS & Tunai
+- ✅ **Voucher System** dengan database PostgreSQL
+- ✅ **Admin Dashboard** untuk manage voucher
+- ✅ **Secure Authentication** dengan NextAuth
+- ✅ **Responsive Design** mobile-friendly
+
+## 📋 Quick Start
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Setup Database
+
+Environment variable sudah dikonfigurasi di `.env` dengan Neon PostgreSQL.
+
+### 3. Create Admin User
+
+```bash
+npm run create-admin
+```
+
+Default credentials:
+- Username: `admin`
+- Password: `admin123`
+
+### 4. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Akses aplikasi di http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎯 Admin Panel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Login: http://localhost:3000/admin/login
 
-## Learn More
+Fitur Admin:
+- Create voucher baru
+- Set status active/inactive
+- Lihat semua voucher
+- Toggle status voucher
+- Hapus voucher
+- Lihat riwayat penggunaan
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+photo-booth/
+├── app/
+│   ├── admin/           # Admin pages (login, dashboard)
+│   ├── api/             # API routes (auth, vouchers)
+│   ├── booth/           # Booth pages (payment, app)
+│   └── page.tsx         # Home page
+├── components/
+│   ├── admin/           # Admin components
+│   ├── booth/           # Booth components
+│   └── ui/              # UI components
+├── lib/
+│   ├── prisma.ts        # Prisma client
+│   └── auth.ts          # Auth helpers
+├── prisma/
+│   ├── schema.prisma    # Database schema
+│   └── migrations/      # Database migrations
+└── scripts/
+    └── create-admin.ts  # Admin creation script
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🗄️ Database Schema
 
-## Deploy on Vercel
+### Admin
+- Username (unique)
+- Password (hashed)
+- Created/Updated timestamps
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Voucher
+- Code (unique, uppercase)
+- Status (active/inactive)
+- Created/Updated timestamps
+- UsedAt (nullable)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔐 API Endpoints
+
+### Public
+- `POST /api/vouchers/verify` - Verify voucher untuk payment
+
+### Protected (Admin)
+- `GET /api/vouchers` - List semua voucher
+- `POST /api/vouchers` - Create voucher baru
+- `PATCH /api/vouchers/[id]` - Update voucher
+- `DELETE /api/vouchers/[id]` - Delete voucher
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 15
+- **Database:** PostgreSQL (Neon)
+- **ORM:** Prisma 6
+- **Auth:** NextAuth.js v5
+- **UI:** Tailwind CSS + Shadcn/ui
+- **Styling:** Glass morphism + Gradient animations
+
+## 📝 Available Scripts
+
+```bash
+npm run dev              # Start development server
+npm run build            # Build for production
+npm run start            # Start production server
+npm run lint             # Run ESLint
+npm run create-admin     # Create admin user
+npm run prisma:generate  # Generate Prisma client
+npm run prisma:migrate   # Run database migrations
+npm run prisma:studio    # Open Prisma Studio
+```
+
+## 📚 Documentation
+
+- [Admin Setup Guide](./ADMIN_SETUP.md)
+- [Setup Instructions](./SETUP.md)
+
+## 🚀 Deployment
+
+See [SETUP.md](./SETUP.md) untuk deployment instructions.
+
+## 📄 License
+
+MIT
