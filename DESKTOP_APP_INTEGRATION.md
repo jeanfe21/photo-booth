@@ -18,6 +18,8 @@ Contoh:
 
 ### Web Side (Current Implementation)
 
+#### 1. Voucher Input Component
+
 File: `components/booth/voucher-input.tsx`
 
 ```typescript
@@ -32,9 +34,33 @@ function openDesktopApp(voucherCode: string) {
 ```
 
 **Behavior:**
-- Mencoba membuka desktop app dengan deep link
+- Mencoba membuka desktop app dengan deep link voucher
 - Jika desktop app tidak terinstall, fallback ke web version setelah 500ms
 - Voucher code dikirim sebagai parameter di URL
+
+#### 2. Booth App Page
+
+File: `app/booth/app/page.tsx`
+
+```typescript
+React.useEffect(() => {
+  // Auto-try to open desktop app when page loads
+  if (typeof window !== "undefined") {
+    window.location.href = "photobooth://start"
+    
+    // If desktop app doesn't open within 1 second, stop loading
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }
+}, [])
+```
+
+**Behavior:**
+- Otomatis mencoba buka desktop app saat halaman load
+- Protocol: `photobooth://start` (tanpa voucher, untuk direct start)
+- Button "Mulai Foto" juga trigger `photobooth://start`
+- Loading state dengan spinner
 
 ### Desktop App Side (Required Setup)
 
@@ -167,6 +193,10 @@ Yes → Open Desktop App (photobooth://session/CODE)
 Wait 500ms
        ↓
 Open Web Fallback (/booth/app)
+       ↓
+/booth/app auto-tries photobooth://start
+       ↓
+Button "Mulai Foto" also triggers photobooth://start
 ```
 
 ## Testing
