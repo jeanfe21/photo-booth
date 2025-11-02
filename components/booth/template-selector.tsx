@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { Button } from "@/components/ui/button"
 
 export interface Template {
   id: string
@@ -95,5 +94,5 @@ export default function TemplateSelector({ onSelect }: TemplateSelectorProps) {
   )
 }
 
-export { templates, type Template }
+export { templates }
 
