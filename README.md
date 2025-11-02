@@ -104,8 +104,8 @@ photo-booth/
 
 - **Framework:** Next.js 15
 - **Database:** PostgreSQL (Neon)
-- **ORM:** Prisma 6
-- **Auth:** NextAuth.js v5
+- **ORM:** Prisma 5.19.0
+- **Auth:** NextAuth.js v4
 - **UI:** Tailwind CSS + Shadcn/ui
 - **Styling:** Glass morphism + Gradient animations
 
@@ -129,7 +129,25 @@ npm run prisma:studio    # Open Prisma Studio
 
 ## 🚀 Deployment
 
-See [SETUP.md](./SETUP.md) untuk deployment instructions.
+### Quick Deploy Options
+
+- **🚀 Vercel** (Recommended): [DEPLOY_VERCEL.md](./DEPLOY_VERCEL.md)
+- **🖥️ VPS**: [QUICK_START_VPS.md](./QUICK_START_VPS.md)
+- **📚 Full Guide**: [DEPLOY_VPS.md](./DEPLOY_VPS.md)
+- **📖 Overview**: [README_DEPLOYMENT.md](./README_DEPLOYMENT.md)
+
+### Environment Variables
+
+```env
+DATABASE_URL="postgresql://..."
+NEXTAUTH_SECRET="your-secret-key"
+NEXTAUTH_URL="https://your-domain.com"
+```
+
+Generate NEXTAUTH_SECRET:
+```bash
+openssl rand -base64 32
+```
 
 ## 📄 License
 
